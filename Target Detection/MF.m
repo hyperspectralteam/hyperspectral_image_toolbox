@@ -7,6 +7,7 @@ function y = MF(X, d)
 %   Then, 
 %   X should be a n*d matrix,
 %   D should be a 1*d matrix.
+
     m = mean(X, 1);
     X = X - m;
     d = d - m;
