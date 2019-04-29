@@ -10,3 +10,4 @@ This is a toolbox for hyperspectral images, which is written by MATLAB(.m).
 
 - CEM - Constrianed Energy Minimization 
 - MTCEM - Multiple Targets Constrained Energy Minimization 
+- MF - Matched Filter
