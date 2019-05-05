@@ -13,7 +13,7 @@ function sel_list = FVGBS(him, noisyBands, num)
 
     x = reshape(him, [], l - length(noisyBands));
     R = x' * x / m / n;
-    K = inv(R);
+    K = pinv(R);
 
     sel_list = (1: l)';
     sel_list(noisyBands) = [];
