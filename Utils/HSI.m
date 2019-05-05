@@ -11,19 +11,7 @@ classdef HSI < handle
     %       result is 1D, you can this function to reshape the result to
     %       2D image.
     %
-    %---------------------------------------------------------------------%
-    %   Usage:
-    %   Assume the you have a 3D hyperspectral image array: hsi_array.
-    %   You can use the following commands to create a HSI object
-    %   and use it.
-    %   h = HSI(hsi_array);
-    %   
-    %   X = h.F();
-    %   loc = [x, y];
-    %   d = h.locate(loc);
-    %
-    %   Assume that y is the target detection result.
-    %   im = h.result_reshape(y);
+    %   See the usages in 'Examples/Basic_Usage.mlx'.
     
     properties
         him
@@ -57,7 +45,7 @@ classdef HSI < handle
             end
             
             if strcmp(mode, '1D')
-                X = obj.F(obj.him);
+                X = obj.F();
                 D = X(loc, :);
             elseif strcmp(mode, '2D')
                 [num, dim] = size(loc);
@@ -82,12 +70,17 @@ classdef HSI < handle
         end
         
         function remove_bands(obj, rm_list)
+            % This function is used to remove the bands in rm_list.
+            
             all_list = 1:obj.shape(end);
             left_list = setdiff(all_list, rm_list);
             obj.him = obj.him(:, :, left_list);
+            obj.shape = size(obj.him);
         end
         
         function preprocess(obj, mode)
+            % You can use this function to normalize or standardized the
+            % data.
             if ~exist('mode', 'var')
                 mode = 'norm';
             end
@@ -106,6 +99,8 @@ classdef HSI < handle
         end
         
         function Y = select_bands(obj, bands, mode)
+            % You can use this function to select bands from the whole
+            % data. And you can choose '1D' or '2D' mode.
             Y = obj.him(:, :, bands);
             if ~exist('mode', 'var')
                 mode = '2D';
@@ -121,6 +116,8 @@ classdef HSI < handle
         end
         
         function rgb = rgb(obj, degree)
+            % This is a simple function to generate a three-band color
+            % composite image.
             if ~exist('degree', 'var')
                 degree = 0.5;
             end
