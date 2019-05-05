@@ -11,19 +11,7 @@ classdef HSI < handle
     %       result is 1D, you can this function to reshape the result to
     %       2D image.
     %
-    %---------------------------------------------------------------------%
-    %   Usage:
-    %   Assume the you have a 3D hyperspectral image array: hsi_array.
-    %   You can use the following commands to create a HSI object
-    %   and use it.
-    %   h = HSI(hsi_array);
-    %   
-    %   X = h.F();
-    %   loc = [x, y];
-    %   d = h.locate(loc);
-    %
-    %   Assume that y is the target detection result.
-    %   im = h.result_reshape(y);
+    %   See the usages in 'Examples/Basic_Usage.mlx'.
     
     properties
         him
@@ -57,7 +45,7 @@ classdef HSI < handle
             end
             
             if strcmp(mode, '1D')
-                X = obj.F(obj.him);
+                X = obj.F();
                 D = X(loc, :);
             elseif strcmp(mode, '2D')
                 [num, dim] = size(loc);
@@ -79,6 +67,84 @@ classdef HSI < handle
             % The detection result y is a 1D array: [m*n, 1].
             % This function will return a image: [m, n].
             im = reshape(y, obj.shape(1:2));
+        end
+        
+        function remove_bands(obj, rm_list)
+            % This function is used to remove the bands in rm_list.
+            
+            all_list = 1:obj.shape(end);
+            left_list = setdiff(all_list, rm_list);
+            obj.him = obj.him(:, :, left_list);
+            obj.shape = size(obj.him);
+        end
+        
+        function preprocess(obj, mode)
+            % You can use this function to normalize or standardized the
+            % data.
+            if ~exist('mode', 'var')
+                mode = 'norm';
+            end
+            
+            if strcmp(mode, 'norm')
+                m1 = max(obj.him, [], [1, 2]);
+                m2 = min(obj.him, [], [1, 2]);
+                obj.him = (obj.him - m2) ./ (m1 - m2);
+            elseif strcmp(mode, 'std')
+                mu = mean(obj.him, [1, 2]);
+                sigma = std(obj.him, [], [1, 2]);
+                obj.him = (obj.him - mu) ./ sigma;
+            else
+                error("Pararmeter 'mode' should be 'norm' or 'std'.")
+            end
+        end
+        
+        function Y = select_bands(obj, bands, mode)
+            % You can use this function to select bands from the whole
+            % data. And you can choose '1D' or '2D' mode.
+            Y = obj.him(:, :, bands);
+            if ~exist('mode', 'var')
+                mode = '2D';
+            end
+            
+            if strcmp(mode, '1D')
+                Y = reshape(Y, [], length(bands));
+            elseif strcmp(mode, '2D')
+                return;
+            else
+                error("Pararmeter 'mode' should be '1D' or '2D'.")
+            end
+        end
+        
+        function rgb = rgb(obj, degree)
+            % This is a simple function to generate a three-band color
+            % composite image.
+            if ~exist('degree', 'var')
+                degree = 0.5;
+            end
+            
+            [m, n, l] = size(obj.him);
+            
+            if degree <= 1/l || degree > 1
+                error('Parameter degree should between 1/bands_num and 1!');
+            end
+            
+            num = round(l * degree);
+
+            X = reshape(obj.him, [], l);
+            [Rn, Rs] = noise_signal_estim(obj.him);
+            Rn_ = pinv(sqrtm(Rn));
+            [V, ~] = eig(Rn_ * Rs * Rn_);
+            Y = X * V;
+
+            Y_ = Y(:, 1: num);
+            V_ = V(:, 1: num);
+            X_ = Y_ * V_'; 
+
+            idx = FVGBS(reshape(X_, [m, n, l]), [], 3);
+            rgb = obj.him(:, :, idx);
+            m1 = max(rgb, [], [1, 2]);
+            m2 = min(rgb, [], [1, 2]);
+            rgb = (rgb - m2) ./ (m1 - m2);
         end
     end
 end
