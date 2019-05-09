@@ -22,7 +22,7 @@ function y = LLE(X, k, d)
     
     %   M = (I - W) * (I - W)' = I - W - W' - W * W'
     M = eye(N);
-    tol=1e-6;
+    tol=1e-3;
     for i = 1 : N
         Z = X(i, :) - X(idx(i, :), :);
         w = pinv(Z * Z' + eye(k) * tol * trace(Z * Z')) * ones(k, 1);
