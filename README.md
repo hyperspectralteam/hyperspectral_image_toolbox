@@ -18,4 +18,3 @@ This is a toolbox for hyperspectral images, which is written by MATLAB(.m).
 
 ### Dimension Reduction
 - LLE - Locally Linear Embedding
-- shuli
