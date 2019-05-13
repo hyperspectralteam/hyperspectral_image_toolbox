@@ -139,9 +139,10 @@ classdef HSI < handle
             Y_ = Y(:, 1: num);
             V_ = V(:, 1: num);
             X_ = Y_ * V_'; 
-
-            idx = FVGBS(reshape(X_, [m, n, l]), [], 3);
-            rgb = obj.him(:, :, idx);
+            him_ = reshape(X_, [m, n, l]);
+            
+            idx = FVGBS(him_, [], 3);
+            rgb = him_(:, :, idx);
             m1 = max(rgb, [], [1, 2]);
             m2 = min(rgb, [], [1, 2]);
             rgb = (rgb - m2) ./ (m1 - m2);
