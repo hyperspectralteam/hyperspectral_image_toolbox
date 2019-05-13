@@ -5,6 +5,7 @@ This is a toolbox for hyperspectral images, which is written by MATLAB(.m).
 
 ### Band Selection
 - FVGBS - Fast Volume Gradient Based Band selection: A Fast Volume Gradient Based Band Selection Method for Hyperspectral_Image.
+- MNF - Minimum Noise Fraction
 
 ### Target Detection
 
