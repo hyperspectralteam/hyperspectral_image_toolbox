@@ -1,4 +1,4 @@
-function y = Spectral_clustering(X,k)
+function y = SpectralClustering(X, k)
 
 %   Spectral Clustering
 %   X is data, n*d matrix
@@ -17,20 +17,20 @@ function y = Spectral_clustering(X,k)
     sigma = 0.2;
     for i = 1:n
         for j = 1:n
-            W(i,j) = exp(-norm(X(i,:)-X(j,:))^2/(sigma^2));
+            W(i, j) = exp(-norm(X(i, :)-X(j, :))^2 / (sigma^2));
         end
     end
 
     D = zeros(n);
     for i = 1:n
-        D(i,i) = sum(W(i,:));
+        D(i, i) = sum(W(i, :));
     end
     L = D - W;
 
-    [S,~,~] = svd(L);
+    [S, ~, ~] = svd(L);
     S_sorted = fliplr(S);
-    v = S_sorted(:,2:k);
-    y = kmeans(v,k);
+    v = S_sorted(:, 2:k);
+    y = kmeans(v, k);
 
 end
 
