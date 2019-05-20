@@ -1,14 +1,14 @@
 classdef HSI < handle
-    %HIS is a Hyperspectral Image object, which can help you a lot.
+    %HSI is a Hyperspectral Image object, which can help you a lot.
     %
     %   HSI - Initialization Function
     %
     %   F - Flatten the 3D data to 2D data.
     %
-    %   loacte - Return the spectra loacte at the given location.
+    %   locate - Return the spectra locate at the given location.
     %
     %   result_reshape - If you use a target detection algorithm and the
-    %       result is 1D, you can this function to reshape the result to
+    %       result is 1D, you can use this function to reshape the result to
     %       2D image.
     %
     %   See the usages in 'Examples/Basic_Usage.mlx'.

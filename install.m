@@ -5,3 +5,4 @@ addpath('Target Detection');
 addpath('Utils');
 addpath('Dimension Reduction');
 addpath('Endmember Extraction');
+addpath('Clustering');
