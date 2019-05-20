@@ -1,4 +1,4 @@
-function E = NFINDER(X, num)
+function E = NFINDR(X, num)
 
     [len, l] = size(X);
     loc_list = randi(len, [num, 1]);

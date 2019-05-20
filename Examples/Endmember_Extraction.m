@@ -2,7 +2,7 @@ clear;
 h = HSI(importdata('Data\Indian_pines.mat'));
 %%
 num = 5;
-E = NFINDER(h.F(), num);
+E = NFINDR(h.F(), num);
 plot(E');
 %%
 P = pinv(E * E') * E * h.F()';
