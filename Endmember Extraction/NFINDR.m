@@ -1,5 +1,8 @@
 function E = NFINDR(X, num)
-
+    %NFINDR is used to extract endmembers
+    % X should be a 2D matrix
+    % num is the number of the endmembers
+    
     [len, l] = size(X);
     loc_list = randi(len, [num, 1]);
 
