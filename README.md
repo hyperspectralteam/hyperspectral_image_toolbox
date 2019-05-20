@@ -14,7 +14,7 @@ This is a toolbox for hyperspectral images, which is written by MATLAB(.m).
 - SAM - Spectral Angle Mapper
 
 ### Utils
-- HSI - Hyperspectral Imagary Object
+- HSI - Hyperspectral Image Object
 
 ### Dimension Reduction
 - LLE - Locally Linear Embedding

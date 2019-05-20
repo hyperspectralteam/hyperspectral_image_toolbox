@@ -20,7 +20,7 @@ function y = LLE(X, k, d)
         idx(i, :) = idx_(2:end);
     end
     
-    %   M = (I - W) * (I - W)' = I - W - W' - W * W'
+    %   M = (I - W) * (I - W)' = I - W - W' + W * W'
     M = eye(N);
     tol=1e-3;
     for i = 1 : N
