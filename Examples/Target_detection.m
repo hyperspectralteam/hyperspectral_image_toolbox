@@ -4,8 +4,7 @@
 % We also show the three-band composite color image.
 
 clear;
-load('Data\Indian_pines.mat');
-h = HSI(indian_pines);
+h = HSI(importdata('Data\Indian_pines.mat'));
 
 rgb = h.rgb(0.2);
 imshow(rgb);

@@ -13,8 +13,11 @@ This is a toolbox for hyperspectral images, which is written by MATLAB(.m).
 - MF - Matched Filter
 - SAM - Spectral Angle Mapper
 
-### Utils
-- HSI - Hyperspectral Image Object
-
 ### Dimension Reduction
 - LLE - Locally Linear Embedding
+
+### Endmember Extraction
+- NFINDR - N-FINDR: an algorithm for fast autonomous spectral end-member determination in hyperspectral data
+
+### Utils
+- HSI - Hyperspectral Image Object

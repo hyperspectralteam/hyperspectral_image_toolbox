@@ -4,9 +4,7 @@
 % Load the indian_pines dataset and use it to initialize a HSI object.
 
 clear;
-load('Data\Indian_pines.mat');
-h = HSI(indian_pines);
-clear indian_pines;
+h = HSI(importdata('Data\Indian_pines.mat'));
 disp(h);
 %% 
 % The default method of .preprocess() is 'normalize'.
