@@ -1,4 +1,4 @@
-function y = SpectralClustering(X, k)
+function idx = SpectralClustering(X, k, sigma)
 
 %   Spectral Clustering
 %   X is data, n*d matrix
@@ -9,35 +9,15 @@ function y = SpectralClustering(X, k)
 %   k is the number of clusters
 %
 %   So,
-%   the output y is the label of each samlpe
-%   y is a n*1 matrix
+%   the output idx is the label of each samlpe
+%   idx is a n*1 matrix
 
-    [n,~] = size(X);
-    W = zeros(n);
-    sigma = 0.2;
-    for i = 1:n
-        for j = 1:n
-            W(i, j) = exp(-norm(X(i, :)-X(j, :))^2 / (sigma^2));
-        end
-    end
-
-    D = zeros(n);
-    for i = 1:n
-        D(i, i) = sum(W(i, :));
-    end
+    num = length(X);
+    W = exp(-squareform((pdist(X) / sigma).^2)) - eye(num);
+    D = diag(sum(W));
     L = D - W;
 
     [S, ~, ~] = svd(L);
-    S_sorted = fliplr(S);
-    v = S_sorted(:, 2:k);
-    y = kmeans(v, k);
+    idx = kmeans(S(:, end-k:end-1), k);
 
 end
-
-
-
-
-
-
-
-
