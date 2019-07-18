@@ -12,12 +12,11 @@ function idx = SpectralClustering(X, k, sigma)
 %   the output idx is the label of each samlpe
 %   idx is a n*1 matrix
 
-    num = length(X);
-    W = exp(-squareform((pdist(X) / sigma).^2)) - eye(num);
+    W = exp(-squareform((pdist(X) / sigma).^2));
     D = diag(sum(W));
     L = D - W;
-
-    [S, ~, ~] = svd(L);
+    
+    [S, ~, ~] = svd(L .* (diag(D).^(-1/2) * diag(D)'.^(-1/2)));
     idx = kmeans(S(:, end-k:end-1), k);
 
 end
