@@ -29,11 +29,8 @@ disp(['The mean value of the fisrt band is ', num2str(mu), '.']);
 % 
 % The default value of degree is 0.5;
 
-degree = 0.3;
-rgb1 = h.rgb(degree);
-rgb2 = h.rgb(1);
-imshow(rgb1);
-imshow(rgb2);
+rgb = h.rgb();
+imshow(rgb);
 %% 
 % You can use .F() to obtain the 2D array of the data.
 
