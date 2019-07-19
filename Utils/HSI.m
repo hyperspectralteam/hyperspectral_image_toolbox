@@ -115,31 +115,21 @@ classdef HSI < handle
             end
         end
         
-        function rgb = rgb(obj, degree)
+        function rgb = rgb(obj)
             % This is a simple function to generate a three-band color
             % composite image.
-            if ~exist('degree', 'var')
-                degree = 0.5;
-            end
             
             [m, n, l] = size(obj.him);
             
-            if degree <= 1/l || degree > 1
-                error('Parameter degree should between 1/bands_num and 1!');
-            end
-            
-            num = round(l * degree);
-
             X = reshape(obj.him, [], l);
             [Rn, Rs] = noise_signal_estim(obj.him);
+            
             Rn_ = pinv(sqrtm(Rn));
-            [V, ~] = eig(Rn_ * Rs * Rn_);
+            [V, ~, ~] = svd(Rn_' * Rs * Rn_);
+            V = Rn_ * V;
             Y = X * V;
 
-            Y_ = Y(:, 1: num);
-            V_ = V(:, 1: num);
-            X_ = Y_ * V_'; 
-            him_ = reshape(X_, [m, n, l]);
+            him_ = reshape(Y, [m, n, l]);
             
             idx = FVGBS(him_, [], 3);
             rgb = him_(:, :, idx);
