@@ -5,6 +5,8 @@ This is a toolbox for hyperspectral images, which is written by MATLAB(.m).
 
 ### Band Selection
 - FVGBS - Fast Volume Gradient Based Band selection: A Fast Volume Gradient Based Band Selection Method for Hyperspectral_Image.
+
+### Band Transform
 - MNF - Minimum Noise Fraction
 
 ### Target Detection
@@ -14,8 +16,11 @@ This is a toolbox for hyperspectral images, which is written by MATLAB(.m).
 - MF - Matched Filter
 - SAM - Spectral Angle Mapper
 
-### Utils
-- HSI - Hyperspectral Imagary Object
-
 ### Dimension Reduction
 - LLE - Locally Linear Embedding
+
+### Endmember Extraction
+- NFINDR - N-FINDR: an algorithm for fast autonomous spectral end-member determination in hyperspectral data
+
+### Utils
+- HSI - Hyperspectral Image Object
