@@ -11,6 +11,6 @@ plot(X(:, 1), X(:, 2), '.');
 
 k = 3;
 X = (X - mean(X, 1)) ./ (max(X, [], 1) - min(X, [], 1));
-y = SpectralClustering(X, k, 0.02);
+y = NSPC(X, k, 0.02);
 %%
 scatter(X(:, 1), X(:, 2), [], y);

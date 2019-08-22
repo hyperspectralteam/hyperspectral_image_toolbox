@@ -29,7 +29,7 @@ function idx = NSPC(X, k, sigma)
     L = D - W;
     I = sparse(1:num, 1:num, ones([num, 1]));
     
-    [S, ~, ~] = svds(I - diag(D)'.^(-1/2) .* L .* diag(D).^(-1/2), k);
-    idx = kmeans(S(:, 2:end), k);
+    [S, ~, ~] = svds(I - diag(D)'.^(-1/2) .* L .* diag(D).^(-1/2), k-1);
+    idx = kmeans(S, k);
 
 end
