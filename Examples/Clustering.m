@@ -3,7 +3,7 @@
 % 
 % Load data.
 
-load('Data\cluster_data.mat');
+load('Data/cluster_data.mat');
 X = cluster_data;
 plot(X(:, 1), X(:, 2), '.');
 %% 

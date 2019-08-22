@@ -15,8 +15,7 @@ function idx = SpectralClustering(X, k, sigma)
     W = exp(-squareform((pdist(X) / sigma).^2));
     D = diag(sum(W));
     L = D - W;
-    
-    [S, ~, ~] = svd(L .* (diag(D).^(-1/2) * diag(D)'.^(-1/2)));
+    [S, ~, ~] = svd( - diag(D)'.^(-1/2) .* L .* diag(D).^(-1/2));
     idx = kmeans(S(:, end-k:end-1), k);
 
 end

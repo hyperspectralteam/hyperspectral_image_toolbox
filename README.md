@@ -37,3 +37,6 @@ This is a toolbox for hyperspectral images, which is written by MATLAB(.m).
 ### Utils
 
 - HSI - Hyperspectral Image Object
+- HSIReader - A function for reading hyperspectral images with '.hdr' header.
+- noise_signal_estim - A function for estimate the noises from the images.
+- tensor_mul - A function for tensor multiply.
