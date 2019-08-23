@@ -11,12 +11,13 @@ function Y = PSA(X, c)
     X_bak = X;
     U = zeros([l, c]);
 
-    S = zeros([l, l, l]);
-    for i = 1:n
-        r2 = tensor_mul(X(i, :)', X(i, :), 2, 0);
-        S = S + tensor_mul(r2, X(i, :)', 3, 0);
-    end
-    S = S / n;
+%     S = zeros([l, l, l]);
+%     for i = 1:n
+%         r2 = tensor_mul(X(i, :)', X(i, :), 2, 0);
+%         S = S + tensor_mul(r2, X(i, :)', 3, 0);
+%     end
+%     S = S / n;
+    S = skewness_tensor(X);
     
     tol = 1e-5;
     for k = 1:c    
