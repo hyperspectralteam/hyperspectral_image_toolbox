@@ -27,7 +27,7 @@ function idx = CCE(X, k, sigma)
     centernum = length(centeridx);
     con = zeros(n, centernum);
     centercon = zeros(1, centernum);
-    idx = zeros(n,1);
+    idx = zeros(n, 1);
     rcon = con;
     
     for i =1:centernum
