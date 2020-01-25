@@ -22,8 +22,16 @@ classdef HSI < handle
         function obj = HSI(him)
             % The array him should be a 3D array: [m, n, l].
             % l should be the number of the bands.
-            obj.him = him;
-            obj.shape = size(him);
+            if ischar(him)
+                [X, ~] = HSIReader(him);
+                obj.him = X;
+                obj.shape = size(him);
+            elseif length(size(him)) == 3
+                obj.him = him;
+                obj.shape = size(him);
+            else
+                error('The input is invaild, it should be the name of the data or a 3D array.')
+            end
         end
         
         function X = F(obj)
